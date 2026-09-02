@@ -2,11 +2,19 @@
 
 Page de liens personnelle de gambidrissi-dev : une sélection d'apps macOS partagées en dehors du Collectif Cobalt, chacune pointant vers sa page de téléchargement (`<nom>-Share`).
 
-Pendant du [LINKTREE_COLLECTIFCOBALT](https://github.com/gambidrissi-dev/LINKTREE_COLLECTIFCOBALT) côté studio, mais identité et contenu propres — vanilla HTML/CSS, sans dépendance, sans build.
+Pendant du [LINKTREE_COLLECTIFCOBALT](https://github.com/gambidrissi-dev/LINKTREE_COLLECTIFCOBALT) côté studio, mais identité et contenu propres — vanilla HTML/CSS, sans dépendance, sans build. Même traitement PWA que le Linktree du studio : installable, fonctionne hors ligne, thème clair/sombre persistant.
 
 ## Structure
 
-Tout tient dans `index.html` (une seule page, CSS et contenu inline). Les icônes d'app sont embarquées en base64 directement dans le CSS/HTML — pas de dossier `assets/`.
+Tout tient dans `index.html` (CSS et contenu inline). Les icônes d'app (Parure, Skillotheque…) sont embarquées en base64 directement dans le HTML — pas de dossier `assets/` pour elles. Le reste :
+
+- `manifest.webmanifest` + `icon-192.png` / `icon-512.png` / `icon-maskable-512.png` / `apple-touch-icon.png` — installation sur Dock/écran d'accueil
+- `sw.js` — service worker (navigation network-first, assets cache-first, cache versionné purgé à l'activation)
+- `fonts/` — Bricolage Grotesque 700, Manrope 400, JetBrains Mono 400 en `.woff2` self-hébergés (seuls les poids réellement utilisés ; pas de requête vers Google Fonts, fonctionne hors ligne)
+- `og-image.jpg` — aperçu de partage (Open Graph / Twitter Card)
+- Toggle de thème (bouton en haut à droite) persisté dans `localStorage`, avec script anti-flash dans le `<head>`
+
+Icônes et image OG générées avec Pillow (dégradé + monogramme « GD », même style que les icônes d'app réelles).
 
 ## Ajouter une app
 

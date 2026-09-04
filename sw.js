@@ -1,4 +1,4 @@
-const CACHE = 'linktree-apps-v2';
+const CACHE = 'linktree-apps-v3';
 
 const PRECACHE = [
   './',
